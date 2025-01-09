@@ -16,16 +16,17 @@ ETH = "KRW-ETH"
 XRP = "KRW-XRP"
 STX = "KRW-STX"
 
-setCoin     = XRP   # 코인설정
-setCoinCd   = "XRP" # 코인설정
-setRSI      = 40    # 매수 RSI 값 설정
-setSellRate = 2.0   # 매도 퍼센트 
+setCoin     = XRP      # 코인설정
+setCoinCd   = "XRP"    # 코인설정
+setRSI      = 40       # 매수 RSI 값 설정
+setSellRate = 2.0      # 매도 퍼센트 
+setBuyAmt   = 100000.0 # 분할매수 가격설정 
 
-min = "minute5"     # 분봉설정
-prevRSI = 0.0       # 매수했던 RSI 지표
-buyCnt  = 0         # 매수횟수
-coinCnt = 0.0       # 코인 수량
-coinAvg = 0.0       # 코인 평단가
+min = "minute5"        # 분봉설정
+prevRSI = 0.0          # 매수했던 RSI 지표
+buyCnt  = 0            # 매수횟수
+coinCnt = 0.0          # 코인 수량
+coinAvg = 0.0          # 코인 평단가
 
 # 업비트 로그인 #
 # access = os.getenv("UPBIT_ACCESS_KEY")
@@ -108,7 +109,7 @@ if __name__ == "__main__" :
                         
                         # 수량 구하기 (분할매수시 10만원 단위)
                         if data['trade_price'] != None:
-                            ea = float(float(10000.0 / float(data['trade_price'])))
+                            ea = float(float(setBuyAmt / float(data['trade_price'])))
                             ea = round(ea,8)
                             print("수량 ::>> ", ea)
                             if float(data['trade_price'])*ea > 5000.0 :
@@ -122,7 +123,7 @@ if __name__ == "__main__" :
                 else : # 최초 매수 아닌 추가매수 
                     if prevRSI - 5 > float(rsiNum[0]) : #기존 매수 RSI지수보다 5작을때
                         print("추가 매수!! ")
-                        ea = float(float(10000.0 / float(data['trade_price'])))
+                        ea = float(float(setBuyAmt / float(data['trade_price'])))
                         ea = round(ea,8)
                         print("수량 : ", ea)
                         if float(data['trade_price'])*ea > 5000.0 :
