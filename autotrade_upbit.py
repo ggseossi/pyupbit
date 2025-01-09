@@ -8,6 +8,7 @@ load_dotenv()
 access = os.getenv("UPBIT_ACCESS_KEY")
 secret = os.getenv("UPBIT_SECRET_KEY")
 
+BTC = "KRW-BTC"
 ETH = "KRW-ETH"
 XRP = "KRW-XRP"
 STX = "KRW-STX"
